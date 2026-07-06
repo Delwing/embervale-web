@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<ScriptPackage>
+		<Script isActive="yes" isFolder="no">
+			<name>init</name>
+			<packageName></packageName>
+			<script>require("embervale")</script>
+			<eventHandlerList />
+		</Script>
+	</ScriptPackage>
+</MudletPackage>

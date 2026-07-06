@@ -1,0 +1,5 @@
+mpackage = "embervale"
+author = "Embervale"
+title = "Embervale UI"
+description = "Demo interface of the fictional Embervale MUD: vitals gauges, the Chronicle window, a drifting location label — all simulated client-side."
+version = "1.0"

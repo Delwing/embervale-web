@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.62" r="0.55">
+      <stop offset="0" stop-color="#e2703a" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#e2703a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="60" fill="#14100d" stroke="#8a4222" stroke-width="2.5"/>
+  <circle cx="64" cy="64" r="52" fill="none" stroke="#3a2b22" stroke-width="1"/>
+  <circle cx="64" cy="72" r="42" fill="url(#glow)"/>
+  <!-- the mountain -->
+  <path d="M28 92 L56 40 L66 58 L74 44 L100 92 Z" fill="#241a15" stroke="#8a4222" stroke-width="1.5"/>
+  <path d="M52 92 L64 66 L76 92 Z" fill="#e2703a"/>
+  <!-- the rising spark -->
+  <circle cx="64" cy="30" r="4" fill="#f0a35e"/>
+  <path d="M64 20 L64 12 M56 24 L51 19 M72 24 L77 19" stroke="#e2703a" stroke-width="2" stroke-linecap="round"/>
+</svg>

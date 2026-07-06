@@ -1,0 +1,24 @@
+{
+  "name": "embervale-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Embervale - a fictional MUD used as the mudix white-label showcase: custom landing, theme, toolbar and a scripted demo UI",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build:pkg": "node scripts/build-pkg.mjs",
+    "dev": "npm run build:pkg && vite",
+    "build": "npm run build:pkg && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "mudix": "./mudix-0.2.1.tgz",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "fflate": "^0.8.2",
+    "vite": "8.0.5"
+  }
+}

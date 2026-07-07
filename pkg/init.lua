@@ -26,8 +26,9 @@ ev.mn  = makeGauge("ev_mn",  "-68px", "#7a4a9e", "Emberflow")
 ev.sta = makeGauge("ev_sta", "-44px", "#b8863b", "Breath")
 
 -- ── The sigil of the Vale: an image asset shipped inside the package,
--- served from the profile filesystem ─────────────────────────────────
-ev.sigil = Geyser.Label:new({ name = "ev_sigil", x = "10px", y = "8px", width = "72px", height = "72px" })
+-- served from the profile filesystem. Sits left of the location label in
+-- the top-right overlay cluster, clear of the console text. ──────────
+ev.sigil = Geyser.Label:new({ name = "ev_sigil", x = "-318px", y = "6px", width = "48px", height = "48px" })
 ev.sigil:setStyleSheet([[background-color: transparent;]])
 setBackgroundImage("ev_sigil", getMudletHomeDir() .. "/embervale/sigil.svg")
 

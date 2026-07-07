@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import 'mudix/styles.css';
-import { MudixApp } from 'mudix';
+import '@delwing/mudix/styles.css';
+import { MudixApp } from '@delwing/mudix';
 import { EmbervaleLanding } from './EmbervaleLanding';
 import embervalePkg from './packages/embervale.mpackage?url';
 

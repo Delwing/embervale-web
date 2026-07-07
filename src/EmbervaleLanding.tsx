@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { setSessionCredentials, type LandingProps } from 'mudix';
+import { setSessionCredentials, type LandingProps } from '@delwing/mudix';
 import './landing.css';
 
 /**

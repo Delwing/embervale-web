@@ -1101,9 +1101,9 @@ monaco-editor@^0.55.1:
     dompurify "3.2.7"
     marked "14.0.0"
 
-mudix@./mudix-0.2.2.tgz:
-  version "0.2.2"
-  resolved "./mudix-0.2.2.tgz#5edd28ab3d465cf2452f6aada7ab5991d11a613f"
+mudix@./mudix-0.2.3.tgz:
+  version "0.2.3"
+  resolved "./mudix-0.2.3.tgz#7b9fae18a0d4c379df425baafccf08fa6e50144c"
   dependencies:
     "@codemirror/autocomplete" "^6.20.1"
     "@codemirror/commands" "^6.10.3"

@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
             profileMode: 'perLogin',
             stockPackages: false,
             packages: [
-                { name: 'embervale', filename: 'embervale.mpackage', url: embervalePkg, removable: false },
+                { name: 'embervale', filename: 'embervale.mpackage', url: embervalePkg, version: '1.2', removable: false },
             ],
             themes: [{
                 id: 'ember',

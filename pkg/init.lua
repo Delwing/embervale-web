@@ -48,11 +48,49 @@ ev.loc:setStyleSheet([[
 openUserWindow("Chronicle")
 setWindowWrap("Chronicle", 60)
 
--- ── Fake world data ─────────────────────────────────────────────────
+-- ── Fake world data: a small mapped district of the Vale ────────────
 local rooms = {
-    "Cinder Gate", "The Ashen Bazaar", "Bridge of Sighs", "Emberdeep Stair",
-    "The Caldera Rim", "Pilgrims' Rest", "Hall of Quiet Bells", "The Glassed Field",
+    { id = 1, name = "Cinder Gate",         x = 0, y = 0, env = 258 },
+    { id = 2, name = "The Ashen Bazaar",    x = 0, y = 1, env = 257 },
+    { id = 3, name = "Bridge of Sighs",     x = 1, y = 1, env = 257 },
+    { id = 4, name = "Emberdeep Stair",     x = 1, y = 0, env = 259 },
+    { id = 5, name = "The Caldera Rim",     x = 1, y = 3, env = 258 },
+    { id = 6, name = "Pilgrims' Rest",      x = 1, y = 2, env = 257 },
+    { id = 7, name = "Hall of Quiet Bells", x = 2, y = 2, env = 259 },
+    { id = 8, name = "The Glassed Field",   x = 0, y = 2, env = 258 },
 }
+local links = {
+    { 1, 2, "north" }, { 1, 4, "east" }, { 2, 3, "east" }, { 4, 3, "north" },
+    { 3, 6, "north" }, { 6, 5, "north" }, { 6, 7, "east" }, { 6, 8, "west" },
+}
+local opposite = { north = "south", south = "north", east = "west", west = "east" }
+
+-- Build the map once per profile (rooms persist in the map store).
+local function buildMap()
+    if getRoomName(1) == "Cinder Gate" then return end
+    local area = addAreaName("Embervale")
+    setCustomEnvColor(257, 120, 104, 92, 255)  -- ash streets
+    setCustomEnvColor(258, 226, 112, 58, 255)  -- ember landmarks
+    setCustomEnvColor(259, 122, 74, 158, 255)  -- emberflow sites
+    for _, r in ipairs(rooms) do
+        addRoom(r.id)
+        setRoomArea(r.id, area)
+        setRoomName(r.id, r.name)
+        setRoomCoordinates(r.id, r.x, r.y, 0)
+        setRoomEnv(r.id, r.env)
+    end
+    for _, l in ipairs(links) do
+        setExit(l[1], l[2], l[3])
+        setExit(l[2], l[1], opposite[l[3]])
+    end
+end
+
+-- Adjacency for the wanderer: walk real exits, not random teleports.
+local neighbors = {}
+for _, l in ipairs(links) do
+    neighbors[l[1]] = neighbors[l[1]] or {}; table.insert(neighbors[l[1]], l[2])
+    neighbors[l[2]] = neighbors[l[2]] or {}; table.insert(neighbors[l[2]], l[1])
+end
 local chronicle = {
     "<ansiRed>A tremor<reset> rolls through the deep. Dust falls from the vaults.",
     "<orange>An ember-moth<reset> circles the lantern, drawn to old heat.",
@@ -79,8 +117,12 @@ function ev.tick()
     tempTimer(1.4, ev.tick)
 end
 
+ev.here = 1
 function ev.wander()
-    ev.loc:echo(string.format("<span style='color:#e2703a'>&#9650;</span>  %s", rooms[math.random(#rooms)]))
+    local next_rooms = neighbors[ev.here]
+    ev.here = next_rooms[math.random(#next_rooms)]
+    ev.loc:echo(string.format("<span style='color:#e2703a'>&#9650;</span>  %s", rooms[ev.here].name))
+    centerview(ev.here)
     tempTimer(6, ev.wander)
 end
 
@@ -110,6 +152,13 @@ you see is drawn by a bundled Lua package, no server attached.
 Try the <reset><orange>Roll d20<reset><grey> button in the top bar.<reset>
 
 ]])
+
+buildMap()
+-- Rebuild the renderer's model unconditionally: rooms persist per profile,
+-- so buildMap may have early-returned — the redraw must still happen.
+updateMap()
+openMapWidget()
+centerview(1)
 
 ev.tick()
 ev.wander()

@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from 'react';
-import { setSessionCredentials, type LandingProps } from '@delwing/mudix';
+import type { FormEvent } from 'react';
+import { useBrandLogin, type LandingProps } from '@delwing/mudix';
 import './landing.css';
 
 /**
@@ -8,13 +8,11 @@ import './landing.css';
  * attached); each character name keeps its own profile.
  */
 export function EmbervaleLanding({ openProfile, ensureBrandProfile, openSettings }: LandingProps) {
-    const [name, setName] = useState('');
+    const { account: name, setAccount: setName, enter: goTo } = useBrandLogin({ openProfile, ensureBrandProfile });
 
     const enter = (e?: FormEvent) => {
         e?.preventDefault();
-        const id = ensureBrandProfile(name);
-        setSessionCredentials(id, { account: name.trim(), password: '' });
-        openProfile(id, false);
+        goTo(false);
     };
 
     return (
